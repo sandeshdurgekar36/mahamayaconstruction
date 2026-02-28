@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construct - Building Your Dreams</title>
+    <style>
+        /* --- Base & Reset Styles --- */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background-color: #000000;
+            /* Deep Navy Background */
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, rgba(29, 53, 87, 0.5) 100%),
+                url('https://dreamhomemaker.in/wp-content/uploads/2025/03/1-85-AKSHAY-LOGO-scaled.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation Header */
+        .header {
+            width: 100%;
+            padding: 10px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-c {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            /* Squared for a more industrial feel */
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #ffffff;
+            background: linear-gradient(135deg, #e63946, #1d3557);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            color: #e63946;
+            /* Primary Red */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 4px;
+            margin: 5px 0;
+            background: #e63946;
+            border-radius: 2px;
+            transition: 0.4s;
+        }
+        @media (max-width: 992px) {
+            .header {
+                flex-direction: row;
+                padding: 10px 20px;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100vw;
+                height: 100vh;
+                width: 70vw;
+                background: #1d3557;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                gap: 30px;
+                padding: 80px 30px;
+                transition: right 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+                z-index: 150;
+            }
+            .nav-links.open {
+                right: 0;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .logo-img {
+                height: 70px;
+                width: 70px;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 0 10px;
+            }
+            .main-text-group {
+                max-width: 100%;
+            }
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .about-section {
+                padding: 60px 10px;
+            }
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .services-section {
+                padding: 60px 10px;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .how-we-work {
+                padding: 60px 10px;
+            }
+            .timeline-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .brands-section {
+                padding: 60px 10px;
+            }
+            .brands-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .projects-section {
+                padding: 60px 10px;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            footer {
+                padding: 20px 0;
+            }
+            .footer-container {
+                flex-direction: column;
+                padding: 0 10px;
+            }
+            .footer-section {
+                margin-bottom: 10px;
+            }
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #e63946;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-red {
+            background-color: #e63946;
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-red:hover {
+            background-color: #c12a36;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #457b9d;
+            /* Muted Blue */
+        }
+
+        .btn-outline:hover {
+            border-color: #ffffff;
+            background-color: #457b9d;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 80px;
+        }
+
+        .main-text-group {
+            max-width: 700px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #a7c5e2;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* --- About Us Section --- */
+        .about-section {
+            padding: 120px 80px;
+            background-color: #ffffff;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image-wrapper img {
+            width: 100%;
+            border-radius: 4px;
+            border-left: 8px solid #1d3557;
+        }
+
+        .exp-badge {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: #1d3557;
+            /* Blue Badge */
+            color: white;
+            padding: 30px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-bottom: 5px solid #e63946;
+            /* Red Accent */
+        }
+
+        .exp-badge h3 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .section-tag {
+            color: #e63946;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            color: #1d3557;
+        }
+
+        .about-desc {
+            color: #8a8ab6;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .icon-box {
+            width: 25px;
+            height: 25px;
+            background: rgba(230, 57, 70, 0.1);
+            color: #e63946;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .feature-text h4 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+            color: #c43e3e;
+        }
+
+        /* --- Services Section --- */
+        .services-section {
+            padding: 100px 80px;
+            position: relative;
+            /* background-color: white; */
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .services-header::before {
+            content: "SERVICES";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 6rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            z-index: -1;
+            letter-spacing: 10px;
+        }
+
+        .services-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .services-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #e63946;
+            /* Red */
+            border-radius: 2px;
+        }
+
+        .services-header h2::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 70px;
+            width: 30px;
+            height: 4px;
+            background: #457b9d;
+            /* Blue */
+            border-radius: 2px;
+        }
+
+        .services-header p {
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #1c2541;
+            padding: 40px;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(230, 57, 70, 0.5);
+            /* Faded Red Border */
+        }
+
+
+        .service-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background: rgba(29, 53, 87, 0.5);
+            border-radius: 12px;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            transition: 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            background: #e63946;
+            color: white;
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .read-more {
+            color: #457b9d;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .logo-img {
+            height: 100px;
+            width: 100px;
+        }
+
+        .read-more:hover {
+            color: #e63946;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .about-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .feature-item {
+                justify-content: center;
+                text-align: left;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .exp-badge {
+                right: 10px;
+            }
+
+            .hero-content {
+                padding: 0 40px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+
+
+        /* --- How We Work: Timeline Design --- */
+        .how-we-work {
+            padding: 120px 50px;
+            background-color: #14151a;
+            overflow: hidden;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 80px auto 0;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* The Connecting Line */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 85px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #1d3557 0%, #e63946 50%, #1d3557 100%);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            position: relative;
+            flex: 1;
+            text-align: center;
+            z-index: 2;
+        }
+
+        /* Circular Image Container */
+        .timeline-img-wrapper {
+            width: 170px;
+            height: 170px;
+            margin: 0 auto 30px;
+            position: relative;
+            border-radius: 50%;
+            border: 5px solid #000;
+            box-shadow: 0 0 0 3px #1d3557;
+            /* Blue Ring */
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .timeline-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+
+        .timeline-number {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e63946;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            border: 3px solid #000;
+            box-shadow: 0 4px 16px rgba(230, 57, 70, 0.25);
+        }
+
+        .timeline-content h3 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            transition: 0.3s;
+        }
+
+        .timeline-content p {
+            color: #a0a0a0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 0 10px;
+            opacity: 0.8;
+        }
+
+        /* --- Hover Effects --- */
+        .timeline-item:hover .timeline-img-wrapper {
+            transform: scale(1.15);
+            box-shadow: 0 0 30px rgba(230, 57, 70, 0.6);
+            /* Red Glow */
+            border-color: #000;
+        }
+
+        .timeline-item:hover .timeline-img-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(230, 57, 70, 0.2);
+            /* Red Tint */
+        }
+
+        .timeline-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        .timeline-item:hover h3 {
+            color: #e63946;
+        }
+
+        /* Responsive adjustment */
+        @media (max-width: 992px) {
+            .timeline-container {
+                flex-direction: column;
+                gap: 60px;
+            }
+
+            .timeline-container::before {
+                display: none;
+            }
+        }
+
+        .divider-icon {
+            position: relative;
+            text-align: center;
+            margin: 70px 0;
+        }
+
+        .divider-icon::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: #eeeeee;
+            z-index: 1;
+        }
+
+        .divider-icon .icon {
+            position: relative;
+            z-index: 2;
+            background: #ffffff;
+            /* Matches your section background */
+            padding: 0 20px;
+            font-size: 1.5rem;
+        }
+
+        /* --- Projects Section Styles --- */
+        .projects-section {
+            padding: 100px 50px;
+            background-color: #000000;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            position: relative;
+            height: 450px;
+            overflow: hidden;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+            opacity: 0.8;
+            transition: all 0.4s ease;
+        }
+
+        .project-info {
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .proj-category {
+            color: #e63946;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .project-info h3 {
+            font-size: 1.8rem;
+            margin: 10px 0;
+            color: #ffffff;
+        }
+
+        .proj-line {
+            width: 0;
+            height: 3px;
+            background: #e63946;
+            transition: width 0.4s ease;
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        /* --- Project Hover Effects --- */
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+            background: linear-gradient(to top, rgba(29, 53, 87, 0.9) 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        .project-card:hover .project-info {
+            transform: translateY(0);
+        }
+
+        .project-card:hover .proj-line {
+            width: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                height: 350px;
+            }
+        }
+
+        /* --- Brands Section Styles --- */
+        /* --- Brands Section (Full Color) --- */
+        .brands-section {
+            padding: 100px 50px;
+            background-color: #ffffff;
+            border-top: 1px solid #eee;
+        }
+
+        .brands-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            align-items: center;
+        }
+
+        .brand-card {
+            background: #ffffff;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            border-radius: 12px;
+            /* Soft shadow instead of grayscale */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .brand-card img {
+            max-width: 100%;
+            max-height: 70px;
+            object-fit: contain;
+            /* No filter here - always in color */
+        }
+
+        /* Hover effect: Subtle lift and brand-color border */
+        .brand-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            border-color: #e63946;
+        }
+
+        @media (max-width: 768px) {
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .brand-card {
+                height: 100px;
+                padding: 15px;
+            }
+        }
+
+        footer {
+            /* background: linear-gradient(135deg, #cf2715 0%, #0574be 100%); */
+            background-color: #1d3557;
+            color: white;
+            padding: 40px 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .footer-section {
+            flex: 1 1 200px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #eee;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.8em;
+        }
+
+        /* --- Ultra Modern Contact Styles --- */
+.contact-ultra-modern {
+    padding: 120px 20px;
+    background: #0a0a0b; /* Darker than the rest of the site */
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Glow Orbs */
+.contact-ultra-modern::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(230, 57, 70, 0.15) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.glow-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.contact-glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 60px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.contact-header-center {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.contact-header-center h2 {
+    font-size: 3rem;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.contact-flex-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.contact-side-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.info-pill {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 25px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+
+.info-pill:hover {
+    background: rgba(230, 57, 70, 0.1);
+    border-color: #e63946;
+}
+
+/* Form Styling */
+.glass-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.floating-label-group input, 
+.floating-label-group select, 
+.floating-label-group textarea {
+    width: 100%;
+    padding: 18px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.floating-label-group input:focus, 
+.floating-label-group textarea:focus {
+    border-color: #457b9d; /* Blue from logo */
+    box-shadow: 0 0 15px rgba(69, 123, 157, 0.3);
+}
+
+/* The Animated Button */
+.submit-glow-btn {
+    position: relative;
+    padding: 20px;
+    background: #e63946;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.submit-glow-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(230, 57, 70, 0.4);
+}
+
+.btn-glow-effect {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+.submit-glow-btn:hover .btn-glow-effect {
+    left: 100%;
+}
+
+@media (max-width: 768px) {
+    .input-row { grid-template-columns: 1fr; }
+    .contact-glass-card { padding: 30px; }
+    .contact-header-center h2 { font-size: 2rem; }
+}
+    </style>
+</head>
+
+<body>
+
+    <section class="hero">
+        <header class="header">
+            <div class="logo-container">
+                <!-- <div class="logo-c">C</div> -->
+                <!-- <div class="logo-text"><span>Construct</span></div> -->
+                <img src="/assets/images/logo2.png" height="100px" class="logo-img" alt="Construct Logo">
+            </div>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav class="nav-links" id="main-nav">
+                <a href="" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About us</a>
+                <a href="#service" class="nav-link">Services</a>
+                <a href="#how-we-work" class="nav-link">How We Work</a>
+                <a href="#projects" class="nav-link">Projects</a>
+            </nav>
+            <a href="#contact" class="btn btn-red">Contact us</a>
+        </header>
+
+        <div class="hero-content">
+            <div class="main-text-group">
+                <h1 class="hero-title">Building Your Dream Into Reality.</h1>
+                <p class="hero-subtitle">We understand that a home is not just walls — it’s emotions, memories, and
+                    future security. That’s why we deliver on-time, on-budget, and without compromise.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-red">Get started</a>
+                    <a href="#" class="btn btn-outline">Free consultation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800"
+                    alt="Construction Progress">
+                <div class="exp-badge">
+                    <h3>15+</h3>
+                    <p>Years of <br>Experience</p>
+                </div>
+            </div>
+
+            <div class="about-text-area">
+                <span class="section-tag">Who We Are</span>
+                <h2 class="section-title">We Are the Best Construction Company in the Industry</h2>
+                <p class="about-desc">At Construct, we don't just build structures; we build dreams. Our team
+                    specializes in creating spaces that blend modern innovation with structural integrity and long-term
+                    value.</p>
+
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <div class="icon-box">✓</div>
+                        <div class="feature-text">
+                            <h4>Quality Control</h4>
+                            <p>Every phase of construction is monitored for maximum safety.</p>
+                        </div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="icon-box">✓</div>
+                        <div class="feature-text">
+                            <h4>On-Time Delivery</h4>
+                            <p>We respect your timeline and deliver results as promised.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <a href="#" class="btn btn-red">Learn More About Us</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="service" class="services-section">
+        <div class="services-header">
+            <span class="section-tag">What We Do</span>
+            <h2>Our Services</h2>
+            <p>We provide comprehensive construction solutions tailored to meet your specific needs with excellence and
+                durability.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-icon">🏗️</span>
+                <h3>Building Construction</h3>
+                <p>From residential homes to massive commercial complexes, we provide end-to-end construction solutions
+                    with precision.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+
+            <div class="service-card">
+                <span class="service-icon">🏠</span>
+                <h3>Home Renovation</h3>
+                <p>Revitalize your existing space with modern designs and high-quality finishes that increase your
+                    property's value.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+
+            <div class="service-card">
+                <span class="service-icon">📐</span>
+                <h3>Architecture & Design</h3>
+                <p>Our expert architects create functional and aesthetic blueprints tailored to your specific vision and
+                    lifestyle.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-icon">
+    </div>
+
+    <section id="how-we-work" class="how-we-work">
+        <div class="services-header">
+            <span class="section-tag">Working Process</span>
+            <h2>4 Easy Steps to Your Dream</h2>
+            <p>A seamless, transparent journey from our first handshake to the final key handover.</p>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-img-wrapper">
+                    <img src="https://img.freepik.com/premium-photo/close-up-business-people-having-consultation-about-wind-energy-company-office-asian-industry-professional-team-sun-light_71455-3161.jpg?semt=ais_hybrid&w=740&q=80"
+                        alt="Consultation & Planning">
+                    <div class="timeline-number">1</div>
+                </div>
+                <div class="timeline-content">
+                    <h3>Initial Consultation</h3>
+                    <p>We meet to understand your vision, discuss the budget, and define the project scope.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-img-wrapper">
+                    <img src="https://w0.peakpx.com/wallpaper/647/586/HD-wallpaper-design-houses-house-layout-drawing-construction-of-houses.jpg"
+                        alt="Step 2">
+                    <div class="timeline-number">2</div>
+                </div>
+                <div class="timeline-content">
+                    <h3>Smart Planning</h3>
+                    <p>Detailed blueprints and cost estimates are finalized for approval.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=400" alt="Step 3">
+                    <div class="timeline-number">3</div>
+                </div>
+                <div class="timeline-content">
+                    <h3>Expert Build</h3>
+                    <p>Our skilled team executes the construction with precision and care.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-img-wrapper">
+                    <img src="https://media.istockphoto.com/id/899926586/photo/hand-with-key-in-front-of-a-house.jpg?s=170667a&w=0&k=20&c=04CTSmOroxHxSv4K076LTnigxjTferZjyV3Uicqa9j0="
+                        alt="Step 4">
+                    <div class="timeline-number">4</div>
+                </div>
+                <div class="timeline-content">
+                    <h3>Move In</h3>
+                    <p>Final quality checks are done and we hand over your beautiful new space.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <div class="services-header">
+            <span class="section-tag">Portfolio</span>
+            <h2>Featured Projects</h2>
+            <p>A showcase of our commitment to structural excellence and aesthetic brilliance.</p>
+        </div>
+
+        <div class="project-grid">
+            <div class="project-card">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwepoYbf8zx_zGgq7dURR8zl4-dfo36HB7KYZBQiirepq678xaojSgSwwWsUJvWzbWowdUEu8JzVgJ3mDmOznKLkRTZ7W-nnhVZjnBF8rB6TFKj1OaAavS9uSX3AeiHsGNP_HqPBD=s680-w680-h510-rw"
+                    alt="Modern Corporate Center">
+                <div class="project-overlay">
+                    <div class="project-info">
+                        <span class="proj-category">Commercial</span>
+                        <h3>Skyline Corporate Tower</h3>
+                        <div class="proj-line"></div>
+                        <p>Downtown Metropolitan Area</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipOdWroed8N6Z5KtYkJVRTbnqQOpdt5Gc-fWZgKz=s680-w680-h510-rw"
+                    alt="Luxury Villa">
+                <div class="project-overlay">
+                    <div class="project-info">
+                        <span class="proj-category">Residential</span>
+                        <h3>The Azure Estate</h3>
+                        <div class="proj-line"></div>
+                        <p>Malibu Coastal Heights</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img
+                    src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweprKRHPSnZIP4cfi96LGpSKaB6vGuu8uwvj9pMK_z1j3QrhgCSv4SNlAmEzlEiE_1lvXU88gYEEWl3S-Se11ygRNlTsvOA1uSJJIACBrb7jjUQULDI0Tmyd6X61oIDi4xvkQIle=s680-w680-h510-rw">
+                <div class="project-overlay">
+                    <div class="project-info">
+                        <span class="proj-category">Architecture</span>
+                        <h3>Nova Art Museum</h3>
+                        <div class="proj-line"></div>
+                        <p>Culture District</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img
+                    src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweoeaNy4M9EnwH890WKC7Lia71uLHKLDE82DHBkfqyWawokrHCvqv_vuS_qaXP2wo7YUQ21BtSMYWz760f1nqkGJi1212U-I4A2udi07Ti6oP6GpdU8cIxfbRiVXcsrEP9b8Vpxrjg=s680-w680-h510-rw">
+                <div class="project-overlay">
+                    <div class="project-info">
+                        <span class="proj-category">Industrial</span>
+                        <h3>Ironworks Logistics Hub</h3>
+                        <div class="proj-line"></div>
+                        <p>East Industrial Zone</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img
+                    src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwepd1ZjK8670KGQt3T_lLzSaw1EwsNEaFZ-o0R0RibKMWvsewJkscgV27rj68UmTGxjbmGDCw4AG40unrMAcYqx_xNvCnJ8hvaymi30lXXH_kCXajjT-KMnXAeCDDHX-UKYCtDxoTw=s680-w680-h510-rw">
+                <div class="project-overlay">
+                    <div class="project-info">
+                        <span class="proj-category">Industrial</span>
+                        <h3>Ironworks Logistics Hub</h3>
+                        <div class="proj-line"></div>
+                        <p>East Industrial Zone</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="#" class="btn btn-outline">View All Projects</a>
+        </div>
+    </section>
+
+    <section class="brands-section">
+        <div class="brands-container">
+            <div class="services-header dark-text">
+                <span class="section-tag">Our Partners</span>
+                <h2 style="color: #1d3557;">Premium Brands We Use</h2>
+                <p style="color: #555;">We partner with the industry's most trusted manufacturers to ensure structural
+                    integrity.</p>
+            </div>
+
+            <div class="brands-grid">
+                <div class="brand-card">
+                    <img src="https://photos.prnewswire.com/prnfull/20150202/10115525" alt="ACC Cement">
+                </div>
+                <div class="brand-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/JSW_Group_logo.svg/1280px-JSW_Group_logo.svg.png"
+                        alt="JSW Steel">
+                </div>
+                <div class="brand-card">
+                    <img
+                        src="https://yt3.googleusercontent.com/xSU1UkIQb5GaWd4_f7Gpb_nrNfp2j0a6eTYMikQY9OS5C7zEGMCMr5vyODUzwHOfYfAqPTy2aQ=s900-c-k-c0x00ffffff-no-rj">
+                </div>
+                <div class="brand-card">
+                    <img src="https://i.pinimg.com/736x/80/61/2d/80612d717e3e8d70fe1c456f2235a5dc.jpg" alt="Tata Steel">
+                </div>
+                <div class="brand-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Havells_Logo.svg/1280px-Havells_Logo.svg.png"
+                        alt="Asian Paints">
+                </div>
+                <div class="brand-card">
+                    <img src="https://5.imimg.com/data5/JM/AC/MY-3368888/jaguar-bathroom-fittings.jpg" alt="Jaquar">
+                </div>
+                <div class="brand-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEWhOClTsDIy_p5zN6pMp4ZHuB65CduNsbcQ&s"
+                        alt="Asian Paints">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-ultra-modern">
+    <div class="glow-container">
+        <div class="contact-glass-card">
+            <div class="contact-header-center">
+                <span class="section-tag">Get in Touch</span>
+                <h2>Let's Build Something Great</h2>
+                <p>Ready to start your project with Shree Mahamaya Consultants? Fill out the form below.</p>
+            </div>
+            
+            <div class="contact-flex-layout">
+                <div class="contact-side-info">
+                    <div class="info-pill">
+                        <span class="pill-icon">📞</span>
+                        <span>+91 74113 34481</span>
+                    </div>
+                    <div class="info-pill">
+                        <span class="pill-icon">📍</span>
+                        <span>Bengaluru, Karnataka</span>
+                    </div>
+                </div>
+
+                <form class="glass-form">
+                    <div class="input-row">
+                        <div class="floating-label-group">
+                            <input type="text" placeholder="Full Name" required>
+                        </div>
+                        <div class="floating-label-group">
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                    </div>
+                    <div class="floating-label-group">
+                        <select required>
+                            <option value="" disabled selected>Nature of Project</option>
+                            <option>Residential Construction</option>
+                            <option>Commercial Projects</option>
+                            <option>Consultation</option>
+                        </select>
+                    </div>
+                    <div class="floating-label-group">
+                        <textarea placeholder="Message" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-glow-btn">
+                        <span>Send Proposal</span>
+                        <div class="btn-glow-effect"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Shree Mahamaya Consultants</h4>
+                <p>Constructing dreams, one brick at a time.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: info@smc.com</p>
+                <p>Phone: 74113 34481</p>
+                <p>Address: Bengaluru, Karnataka, India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Shree Mahamaya Consultants. All Rights Reserved.
+        </div>
+    </footer>
+
+<script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger-menu');
+    const navLinks = document.getElementById('main-nav');
+    hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('open');
+        hamburger.classList.toggle('active');
+    });
+    // Close nav on link click (for mobile UX)
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            hamburger.classList.remove('active');
+        });
+    });
+</script>
+</body>
+</html>
